@@ -29,15 +29,26 @@ public class Ejercicios {
      */
     public static boolean areAnagrams(String str1, String str2) {
 
-        HashMap <Character, Integer>mapaXD= new HashMap<>();
-        HashMap<Character, Integer>mapaXD2= new HashMap<>();
-
-        for(Character caracter: mapaXD.keySet()){
-
-            
+        if (str1.length() !=str2.length()) {
+            return false;
         }
 
-        //throw new UnsupportedOperationException("Not implemented yet");
+        HashMap<Character, Integer> charCountMap1 = new HashMap<>();
+        HashMap<Character, Integer> charCountMap2 = new HashMap<>();
+
+        // Contar frecuencias de caracteres en la primera cadena
+        for (char c : str1.toCharArray()) {
+            charCountMap1.put(c, charCountMap1.getOrDefault(c, 0) + 1);
+        }
+
+        // Contar frecuencias de caracteres en la segunda cadena
+        for (char c : str2.toCharArray()) {
+            charCountMap2.put(c, charCountMap2.getOrDefault(c, 0) + 1);
+        }
+
+        // Comparar los dos mapas
+        return charCountMap1.equals(charCountMap2);
+        
 
     }
 
@@ -57,6 +68,26 @@ public class Ejercicios {
      * Output: null
      */
     public int[] sumatoriaDeDos(int[] nums, int objetivo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        HashMap<Integer, Integer> numMap = new HashMap<>();
+
+        // Recorrer el array de números
+        for (int i = 0; i < nums.length; i++) {
+            int complemento = objetivo - nums[i];
+
+            // Verificar si el complemento ya está en el mapa
+            if (numMap.containsKey(complemento)) {
+                return new int[] { numMap.get(complemento), i };
+            }
+
+            // Si no, agregar el número actual al mapa con su índice
+            numMap.put(nums[i], i);
+        }
+
+        // Si no se encuentra ninguna solución, retornar null
+        return null;
+    
+    }
+       
     }
 }
